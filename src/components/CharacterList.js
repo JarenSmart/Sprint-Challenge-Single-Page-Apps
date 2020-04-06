@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import CharacterCard from "./CharacterCard";
+import SearchForm from "./SearchForm";
 
 export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
-  console.log(characters);
+  const [searchPage, setSearchPage] = useState([]);
+
+  const search = pageArr => {
+    setSearchPage(pageArr);
+  };
 
   useEffect(() => {
     Axios.get(
@@ -21,6 +26,12 @@ export default function CharacterList() {
 
   return (
     <section className="character-list">
+      <SearchForm search={search} characters={characters} />
+      {searchPage.map(filteredCharacters => {
+        return (
+          
+        );
+      })}
       {characters.map(props => {
         return (
           <CharacterCard
