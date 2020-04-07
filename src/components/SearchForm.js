@@ -23,8 +23,8 @@ function SearchForm() {
   const SearchBar = styled.div`
     display: flex;
     justify-content: center;
-    margin: 20px;
-    align-content: center;
+    align-items: center;
+    flex-direction: column;
   `;
 
   const SearchResults = styled.div`
@@ -35,6 +35,17 @@ function SearchForm() {
     text-align: center;
   `;
 
+  const SearchedImg = styled.img`
+    height: 300px;
+    width: 300px;
+    left: 40px;
+    top: 50px;
+    border-radius: 12px;
+    > img {
+      width: 200px;
+    }
+  `;
+
   const SearchedName = styled.h2`
     color: red;
     text-align: center;
@@ -42,7 +53,7 @@ function SearchForm() {
 
   const CharDataWrapper = styled.div`
     width: auto;
-    padding: 5px;
+    margin-left: 18px;
   `;
 
   const CharData = styled.h3`
@@ -64,7 +75,9 @@ function SearchForm() {
         return (
           <SearchBar>
             <SearchResults>
-              <img alt="character" src={character.image} />
+              <div>
+                <SearchedImg alt="character" src={character.image} />
+              </div>
               <CharDataWrapper>
                 <SearchedName>{character.name}</SearchedName>
                 <CharData>{character.species}</CharData>
