@@ -8,7 +8,7 @@ function CharacterCard(props) {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 90px 0;
+    padding: 70px 0;
     width: 100%;
     height: 75vh;
   `;
@@ -19,7 +19,7 @@ function CharacterCard(props) {
     padding: 20px;
     background: #191b21;
     border-radius: 10px;
-    height: 500px;
+    height: auto;
     position: relative;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
   `;

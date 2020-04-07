@@ -1,36 +1,78 @@
-// import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import styled from "styled-components";
 
-// function SearchForm() {
-//   const [searchTerm, setSearchTerm] = useState("");
-//   const [searchResults, setSearchResults] = useState([]);
+function SearchForm() {
+  const [data, setData] = useState([]);
+  const [searchResults, setSearchResults] = useState("");
 
-//   const changeHandler = (event) => {
-//     setSearchTerm(event.target.value);
-//   };
+  useEffect(() => {
+    axios.get("https://rickandmortyapi.com/api/character/").then((res) => {
+      const characters = res.data.results.filter((character) =>
+        character.name.toLowerCase().includes(searchResults.toLowerCase())
+      );
 
-//   useEffect(() => {
-//     const searchedData = props.characters.filter((filteredCharacters) =>
-//       filteredCharacters.toLowerCase().includes(searchTerm.toLowerCase())
-//     );
-//     setSearchResults(searchedData);
-//   }, [searchTerm]);
+      setData(characters);
+    });
+  }, [searchResults]);
 
-//   return (
-//     <section className="search-form">
-//       // Add a search form here
-//       <input
-//         onChange={changeHandler}
-//         type="text"
-//         value={searchTerm}
-//         placeholder="Search"
-//       ></input>
-//       <ul>
-//         {searchResults.map((item) => (
-//           <li>{item}</li>
-//         ))}
-//       </ul>
-//     </section>
-//   );
-// }
+  const changeHandler = (event) => {
+    setSearchResults(event.target.value);
+  };
 
-// export default SearchForm;
+  const SearchBar = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  `;
+
+  const SearchResults = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px;
+    text-align: center;
+  `;
+
+  const SearchedName = styled.h1`
+    color: red;
+    text-align: center;
+  `;
+
+  const CharDataWrapper = styled.div`
+    width: auto;
+    padding: 5px;
+  `;
+
+  const CharData = styled.h3`
+    color: blue;
+  `;
+
+  return (
+    <section className="search-form">
+      <input
+        id="name"
+        type="text"
+        name="textfield"
+        value={searchResults}
+        placeholder="Search"
+        onChange={changeHandler}
+      />
+
+      {data.map((character) => {
+        return (
+          <SearchResults>
+            <img alt="character" src={character.image} />
+            <CharDataWrapper>
+              <SearchedName>{character.name}</SearchedName>
+              <CharData>{character.species}</CharData>
+              <CharData>{character.gender}</CharData>
+            </CharDataWrapper>
+          </SearchResults>
+        );
+      })}
+    </section>
+  );
+}
+
+export default SearchForm;
