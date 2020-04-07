@@ -24,6 +24,7 @@ function SearchForm() {
     display: flex;
     justify-content: center;
     margin: 20px;
+    align-content: center;
   `;
 
   const SearchResults = styled.div`
@@ -34,7 +35,7 @@ function SearchForm() {
     text-align: center;
   `;
 
-  const SearchedName = styled.h1`
+  const SearchedName = styled.h2`
     color: red;
     text-align: center;
   `;
@@ -45,7 +46,7 @@ function SearchForm() {
   `;
 
   const CharData = styled.h3`
-    color: blue;
+    color: black;
   `;
 
   return (
@@ -61,14 +62,16 @@ function SearchForm() {
 
       {data.map((character) => {
         return (
-          <SearchResults>
-            <img alt="character" src={character.image} />
-            <CharDataWrapper>
-              <SearchedName>{character.name}</SearchedName>
-              <CharData>{character.species}</CharData>
-              <CharData>{character.gender}</CharData>
-            </CharDataWrapper>
-          </SearchResults>
+          <SearchBar>
+            <SearchResults>
+              <img alt="character" src={character.image} />
+              <CharDataWrapper>
+                <SearchedName>{character.name}</SearchedName>
+                <CharData>{character.species}</CharData>
+                <CharData>{character.gender}</CharData>
+              </CharDataWrapper>
+            </SearchResults>
+          </SearchBar>
         );
       })}
     </section>
